@@ -14,9 +14,7 @@ export default function useCachedResources() {
 
         // Load fonts
         await Font.loadAsync({
-          ...FontAwesome.font,
-          "space-mono": require("../assets/fonts/SpaceMono-Regular.ttf"),
-          "zhi mang xing": require("../assets/fonts/ZhiMangXing-Regular.ttf"),
+          "zhi mang xing": require("../../assets/fonts/ZhiMangXing-Regular.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

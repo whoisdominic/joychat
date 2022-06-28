@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import useCachedResources from "./hooks/useCachedResources";
-import SplashScreen from "./screens/Splash.screen";
+import useCachedResources from "./src/hooks/useCachedResources";
+import SplashScreen from "./src/screens/Splash.screen";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();

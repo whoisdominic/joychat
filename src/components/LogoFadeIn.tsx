@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { View } from "react-native";
 import Animated, {
   Easing,
@@ -22,11 +22,21 @@ export const LogoFadeIn = () => {
     { letter: "聊", value: useSharedValue(0) },
   ];
 
+  const [showCopy, setShowCopy] = useState(false);
+
+  useLayoutEffect(() => {
+    (async () => {
+      await asyncDelay(250);
+      setShowCopy(true);
+    })();
+  }, []);
+
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
-      {lettersToMap.map((item, index) => (
-        <FadeLetter key={item.letter} {...item} step={index} />
-      ))}
+      {showCopy &&
+        lettersToMap.map((item, index) => (
+          <FadeLetter key={item.letter} {...item} step={index} />
+        ))}
     </View>
   );
 };
@@ -47,7 +57,7 @@ const FadeLetter: React.FC<FadeLetterProps> = ({
   });
 
   const fadeIn = async () => {
-    await asyncDelay(300 * step);
+    await asyncDelay(333 * step);
     opacity.value = withTiming(1, {
       duration: 1250,
       easing: Easing.ease,
