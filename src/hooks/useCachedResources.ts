@@ -15,6 +15,9 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           "zhi mang xing": require("../../assets/fonts/ZhiMangXing-Regular.ttf"),
+          NotoSans: require("../../assets/fonts/NotoSansSC-Regular.otf"),
+          "NotoSans-medium": require("../../assets/fonts/NotoSansSC-Medium.otf"),
+          "NotoSans-light": require("../../assets/fonts/NotoSansSC-Light.otf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service

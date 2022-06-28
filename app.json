@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "joychat",
-    "slug": "joychat",
+    "name": "travel-ch",
+    "slug": "travel-ch",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "joychat",
+    "scheme": "travel-ch",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",

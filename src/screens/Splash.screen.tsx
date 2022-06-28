@@ -1,26 +1,37 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useState } from "react";
 import {
-  ImageBackground,
   SafeAreaView,
   StyleSheet,
-  Text,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
-import LogoFadeIn from "../components/LogoFadeIn";
+import { Fx } from "../components/effects";
+import { LetterFadeIn } from "../components/LetterFadeIn";
+import { normalize } from "../utils";
+import { ImageBackgroundCarousel } from "../components/ImageBackgroundCarousel";
+import BottomSheet from "../components/BottomSheet";
+import SplashImages from "../constants/SplashImages";
 
 const SplashScreen = () => {
+  const [drawer, setDrawer] = useState(false);
+
+  const handleBackdropPress = () => {
+    setDrawer(false);
+  };
+
   return (
-    <ImageBackground
-      source={{
-        uri: "https://images.unsplash.com/photo-1548850174-70a1cf2c5f09?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-      }}
-      resizeMode="cover"
-      style={styles.image}
-    >
-      <SafeAreaView style={styles.root}>
-        <LogoFadeIn />
+    <ImageBackgroundCarousel images={SplashImages}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <TouchableWithoutFeedback onPress={handleBackdropPress}>
+          <View style={styles.root}>
+            <Fx.EzTouch onPress={() => setDrawer(true)}>
+              <LetterFadeIn copy="轻松出行" />
+            </Fx.EzTouch>
+          </View>
+        </TouchableWithoutFeedback>
       </SafeAreaView>
-    </ImageBackground>
+      <BottomSheet show={drawer} setShow={setDrawer} />
+    </ImageBackgroundCarousel>
   );
 };
 
@@ -29,16 +40,8 @@ export default SplashScreen;
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
-    paddingHorizontal: 16,
-  },
-  image: {
-    flex: 1,
-  },
-  h1: {
-    fontFamily: "zhi mang xing",
-    fontSize: 48,
-    color: "#FFF",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: normalize(32),
   },
 });
