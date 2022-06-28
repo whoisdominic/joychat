@@ -1,6 +1,6 @@
-import React from 'react';
-import { View } from 'react-native';
-import { normalize } from '../../utils';
+import React from "react";
+import { View } from "react-native";
+import { normalize } from "../../utils";
 
 interface SpacerProps {
   // Margin
@@ -19,7 +19,15 @@ interface SpacerProps {
   horz?: number;
 }
 
-export const Spacer: React.FC<SpacerProps> = ({ all, left, right, bottom, vert, horz, top }) => {
+export const Spacer: React.FC<SpacerProps> = ({
+  all,
+  left,
+  right,
+  bottom,
+  vert,
+  horz,
+  top,
+}) => {
   return (
     <View
       style={{
@@ -33,3 +41,4 @@ export const Spacer: React.FC<SpacerProps> = ({ all, left, right, bottom, vert, 
       }}
     />
   );
+};

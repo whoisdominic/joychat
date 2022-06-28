@@ -21,7 +21,7 @@ interface LetterFadeIn {
   spacing?: number;
 }
 
-export const LetterFadeIn: React.FC<LetterFadeIn> = ({ copy }) => {
+export const LetterFadeIn: React.FC<LetterFadeIn> = ({ copy, spacing }) => {
   const lettersToMap: LetterItem[] = copy.split("").flatMap((letter, index) => {
     return { letter, value: useSharedValue(0) };
   });
@@ -39,7 +39,7 @@ export const LetterFadeIn: React.FC<LetterFadeIn> = ({ copy }) => {
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       {showCopy &&
         lettersToMap.map((item, index) => (
-          <FadeLetter key={index} {...item} step={index} />
+          <FadeLetter key={index} {...item} spacing={spacing} step={index} />
         ))}
     </View>
   );

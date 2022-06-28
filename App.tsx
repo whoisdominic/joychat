@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import useCachedResources from "./src/hooks/useCachedResources";
+import MainStack from "./src/navigation/MainStack";
 import SplashScreen from "./src/screens/Splash.screen";
 
 export default function App() {
@@ -13,7 +14,7 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <StatusBar style="light" />
-        <SplashScreen />
+        <MainStack />
       </SafeAreaProvider>
     );
   }

@@ -1,36 +1,43 @@
 import React, { useState } from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import { Fx } from "../components/effects";
 import { LetterFadeIn } from "../components/LetterFadeIn";
-import { normalize } from "../utils";
+import { asyncDelay, normalize } from "../utils";
 import { ImageBackgroundCarousel } from "../components/ImageBackgroundCarousel";
-import BottomSheet from "../components/BottomSheet";
 import SplashImages from "../constants/SplashImages";
+import Btn from "../components/Buttons";
 
-const SplashScreen = () => {
-  const [drawer, setDrawer] = useState(false);
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { MainStackParamsList } from "../navigation/MainStack";
+import Colors from "../constants/Colors";
 
-  const handleBackdropPress = () => {
-    setDrawer(false);
+type Props = NativeStackScreenProps<MainStackParamsList, "Splash">;
+
+const SplashScreen: React.FC<Props> = ({ navigation }) => {
+  const [readyForNextScreen, setreadyForNextScreen] = useState(false);
+
+  const handleEnter = async () => {
+    setreadyForNextScreen(true);
+    await asyncDelay(1250);
+    navigation.navigate("Main");
   };
 
   return (
     <ImageBackgroundCarousel images={SplashImages}>
       <SafeAreaView style={{ flex: 1 }}>
-        <TouchableWithoutFeedback onPress={handleBackdropPress}>
-          <View style={styles.root}>
-            <Fx.EzTouch onPress={() => setDrawer(true)}>
-              <LetterFadeIn copy="轻松出行" />
-            </Fx.EzTouch>
-          </View>
-        </TouchableWithoutFeedback>
+        <View style={styles.root}>
+          <LetterFadeIn copy="轻松出行" />
+          <Fx.FadeIn visible={!readyForNextScreen}>
+            <Fx.FadeIn delay={2500} time={500}>
+              <Btn.Primary
+                copy="进入"
+                color={Colors.dark.red}
+                onPress={handleEnter}
+              />
+            </Fx.FadeIn>
+          </Fx.FadeIn>
+        </View>
       </SafeAreaView>
-      <BottomSheet show={drawer} setShow={setDrawer} />
     </ImageBackgroundCarousel>
   );
 };

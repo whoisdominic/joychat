@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { ViewStyle } from "react-native";
 import { normalize } from "../utils";
 import Animated, {
   Easing,
@@ -9,15 +9,18 @@ import Animated, {
 } from "react-native-reanimated";
 import {
   GestureEvent,
-  HandlerStateChangeEvent,
   PanGestureHandler,
   PanGestureHandlerEventPayload,
 } from "react-native-gesture-handler";
+import { Fx } from "./effects";
 
 export const BottomSheet: React.FC<{
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ show, setShow }) => {
+  style?: ViewStyle;
+  height?: number;
+  center?: boolean;
+}> = ({ show, setShow, height, style, center, children }) => {
   /**
    * Drawer Animation logic
    */
@@ -25,7 +28,7 @@ export const BottomSheet: React.FC<{
 
   const drawerHeight = useSharedValue(0);
 
-  const defaultHeight = 400;
+  const defaultHeight = height ?? 400;
 
   const drawerStyle = useAnimatedStyle(() => {
     return {
@@ -62,9 +65,7 @@ export const BottomSheet: React.FC<{
     }
   };
 
-  const handlePanEnd = (
-    event: HandlerStateChangeEvent<Record<string, unknown>>
-  ) => {
+  const handlePanEnd = () => {
     if (show) {
       openDrawer();
     }
@@ -82,6 +83,7 @@ export const BottomSheet: React.FC<{
     <PanGestureHandler onGestureEvent={handlePanGesture} onEnded={handlePanEnd}>
       <Animated.View
         style={[
+          style,
           {
             zIndex: 999,
             bottom: 0,
@@ -90,14 +92,16 @@ export const BottomSheet: React.FC<{
             width: "100%",
             borderTopLeftRadius: normalize(12),
             borderTopRightRadius: normalize(12),
+            alignItems: center ? "center" : undefined,
+            justifyContent: center ? "center" : undefined,
           },
           drawerStyle,
         ]}
-      />
+      >
+        <Fx.FadeIn visible={show}>{children}</Fx.FadeIn>
+      </Animated.View>
     </PanGestureHandler>
   );
 };
 
 export default BottomSheet;
-
-const styles = StyleSheet.create({});

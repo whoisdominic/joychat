@@ -16,13 +16,14 @@ export const ImageBackgroundCarousel: React.FC<
 > = ({ children, images }) => {
   if (images.length < 2) {
     console.error("ImageBackgroundCarousel: Minimum length is 2");
+    return <></>;
   }
 
   const fadeSpeed = 2000;
+  let lastImageIndex = images.length - 1;
 
   const [nextImage, setNextImage] = useState(1);
   const [imageInFocus, setImageInFocus] = useState<"left" | "right">("left");
-  let lastImageIndex = images.length - 1;
 
   const [leftImage, setLeftImage] = useState(images[0]);
   const [rightImage, setRightImage] = useState(images[1]);
