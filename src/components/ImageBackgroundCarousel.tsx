@@ -98,7 +98,7 @@ export const ImageBackgroundCarousel: React.FC<
     }
     let timer = setInterval(() => {
       rotateToNextImage();
-    }, 10000);
+    }, 5000);
 
     return () => {
       clearInterval(timer);

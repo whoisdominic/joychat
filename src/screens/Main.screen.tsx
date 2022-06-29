@@ -61,7 +61,9 @@ const Card: React.FC<{ image: string; label: string }> = ({
               alignItems: "center",
             }}
           >
-            <Typo.H3 copy={label} />
+            <Fx.FadeIn delay={1300} time={800}>
+              <Typo.H3 copy={label} />
+            </Fx.FadeIn>
           </View>
         </ImageBackground>
       </Fx.EzTouch>

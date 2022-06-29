@@ -28,7 +28,7 @@ const SplashScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.root}>
           <LetterFadeIn copy="轻松出行" />
           <Fx.FadeIn visible={!readyForNextScreen}>
-            <Fx.FadeIn delay={2500} time={500}>
+            <Fx.FadeIn delay={2750} time={500}>
               <Btn.Primary
                 copy="进入"
                 color={Colors.dark.red}
